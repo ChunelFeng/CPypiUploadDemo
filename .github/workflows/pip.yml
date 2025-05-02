@@ -36,10 +36,6 @@ jobs:
           python3 setup.py build
           python setup.py sdist bdist_wheel
 
-    - name: Verify TWINE_PASSWORD is set
-      run: |
-          echo "TWINE_PASSWORD length: ${#TWINE_PASSWORD}"
-
     - name: Upload to pypi
       env:
         TWINE_USERNAME: __token__
