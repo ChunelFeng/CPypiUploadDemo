@@ -39,8 +39,7 @@ jobs:
 
     - name: Build and install
       run: |
-        cd python
-        python3 setup.py build
+        python setup.py build
         python setup.py sdist bdist_wheel
 
     - name: Upload to pypi
@@ -48,6 +47,5 @@ jobs:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
       run: |
-        cd python
         twine check dist/*
         twine upload --verbose dist/*
