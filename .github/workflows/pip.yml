@@ -13,7 +13,7 @@ jobs:
       fail-fast: false
       matrix:
         platform: [ubuntu-latest, ubuntu-18.04, ubuntu-16.04, macos-latest, windows-latest]
-        python-version: ["3.8", "3.9", "3.10"]
+        # python-version: ["3.8", "3.9", "3.10"]
 
     runs-on: ${{ matrix.platform }}
 
@@ -36,37 +36,39 @@ jobs:
           python3 setup.py build
           python setup.py sdist bdist_wheel
 
-#    - name: Upload to pypi
-#      env:
-#        TWINE_USERNAME: __token__
-#        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
-#      run: |
-#          cd python
-#          twine upload --verbose dist/*
-
-    - name: Upload to PyPI
+    - name: Upload to pypi
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
       run: |
-        cd python
-        echo "Checking files in dist/ directory:"
-        ls -l dist/
-    
-        pip install auditwheel
-    
-        # 修复 dist/ 目录中的所有 .whl 文件
-        for whl in dist/*.whl; do
-          echo "Repairing $whl"
-          auditwheel repair "$whl" -w dist/
-        done
+          cd python
+          twine check dist/*
+          twine upload --verbose dist/*
 
-        for whl in dist/*.whl; do
-          if [[ ! $whl =~ manylinux ]]; then
-            echo "Deleting original file: $whl"
-            rm "$whl"
-          fi
-        done
-    
-        # 上传修复后的文件
-        twine upload --verbose dist/*
+
+#    - name: Upload to PyPI
+#      env:
+#        TWINE_USERNAME: __token__
+#        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+#      run: |
+#        cd python
+#        echo "Checking files in dist/ directory:"
+#        ls -l dist/
+#
+#        pip install auditwheel
+#
+#        # 修复 dist/ 目录中的所有 .whl 文件
+#        for whl in dist/*.whl; do
+#          echo "Repairing $whl"
+#          auditwheel repair "$whl" -w dist/
+#        done
+#
+#        for whl in dist/*.whl; do
+#          if [[ ! $whl =~ manylinux ]]; then
+#            echo "Deleting original file: $whl"
+#            rm "$whl"
+#          fi
+#        done
+#
+#        # 上传修复后的文件
+#        twine upload --verbose dist/*
