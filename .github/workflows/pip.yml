@@ -12,8 +12,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.6", "3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
+        platform: [ubuntu-20.04, ubuntu-18.04, ubuntu-16.04, macos-latest, windows-latest]
+        python-version: ["3.8", "3.9", "3.10"]
 
     runs-on: ${{ matrix.platform }}
 
@@ -41,4 +41,5 @@ jobs:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_API_COMMON_TOKEN }}
       run: |
+          cd python
           twine upload dist/*
