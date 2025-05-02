@@ -28,7 +28,7 @@ jobs:
 
     - name: Add requirements
       run: |
-          python -m pip install --upgrade pybind11 wheel setuptools twine
+          python -m pip install --upgrade pybind11 wheel setuptools twine auditwheel
 
     - name: Build and install
       run: |
@@ -36,10 +36,37 @@ jobs:
           python3 setup.py build
           python setup.py sdist bdist_wheel
 
-    - name: Upload to pypi
+#    - name: Upload to pypi
+#      env:
+#        TWINE_USERNAME: __token__
+#        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+#      run: |
+#          cd python
+#          twine upload --verbose dist/*
+
+    - name: Upload to PyPI
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
       run: |
-          cd python
-          twine upload --verbose dist/*
+        cd python
+        echo "Checking files in dist/ directory:"
+        ls -l dist/
+    
+        pip install auditwheel
+    
+        # 修复 dist/ 目录中的所有 .whl 文件
+        for whl in dist/*.whl; do
+          echo "Repairing $whl"
+          auditwheel repair "$whl" -w dist/
+        done
+
+        for whl in dist/*.whl; do
+          if [[ ! $whl =~ manylinux ]]; then
+            echo "Deleting original file: $whl"
+            rm "$whl"
+          fi
+        done
+    
+        # 上传修复后的文件
+        twine upload --verbose dist/*
