@@ -4,7 +4,7 @@ from setuptools import setup, Extension
 import pybind11
 
 __CUPLOADER_NAME__ = "PyCUploader"
-__CUPLOADER_VERSION__ = "0.0.11"
+__CUPLOADER_VERSION__ = "0.0.12"
 __CUPLOADER_AUTHOR__ = "Chunel"
 __CUPLOADER_AUTHOR_EMAIL__ = "chunel@foxmail.com"
 __CUPLOADER_DESCRIPTION__ = "Chunel test pypi uploader"
