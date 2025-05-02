@@ -1,6 +1,6 @@
 
 #include <pybind11/pybind11.h>
-#include "../src/MyPypiDemo.h"
+#include "src/MyPypiDemo.h"
 
 namespace py = pybind11;
 
