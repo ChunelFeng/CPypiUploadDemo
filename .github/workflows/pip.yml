@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [ubuntu-18.04, ubuntu-16.04, macos-latest, windows-latest]
+        platform: [ubuntu-latest, ubuntu-18.04, ubuntu-16.04, macos-latest, windows-latest]
         python-version: ["3.8", "3.9", "3.10"]
 
     runs-on: ${{ matrix.platform }}
@@ -36,10 +36,14 @@ jobs:
           python3 setup.py build
           python setup.py sdist bdist_wheel
 
+    - name: Verify TWINE_PASSWORD is set
+      run: |
+          echo "TWINE_PASSWORD length: ${#TWINE_PASSWORD}"
+
     - name: Upload to pypi
       env:
         TWINE_USERNAME: __token__
-        TWINE_PASSWORD: pypi-AgEIcHlwaS5vcmcCJGQ1YWE2OWQ1LTg5NDctNDE3ZS04OTliLWU4NDk3NWUzZTg2YQACKlszLCJlZDlkYWFmNi0yNWQ3LTQ5NTItYjQzYy04Y2RmYjZhZmMxYmQiXQAABiCUi5zEW0NI1K49kWzpSF41RlbGy5PO0l9SpS5w-lcQ6A
+        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
       run: |
           cd python
           twine upload --verbose dist/*
