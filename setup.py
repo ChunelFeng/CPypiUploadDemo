@@ -5,7 +5,7 @@ import pybind11
 import os
 
 __CUPLOADER_NAME__ = "PyCUploader"
-__CUPLOADER_VERSION__ = "0.0.17"
+__CUPLOADER_VERSION__ = "0.0.18"
 __CUPLOADER_AUTHOR__ = "Chunel"
 __CUPLOADER_AUTHOR_EMAIL__ = "chunel@foxmail.com"
 __CUPLOADER_DESCRIPTION__ = "Chunel test pypi uploader"
@@ -14,7 +14,7 @@ __CUPLOADER_LICENSE__ = "Apache 2.0"
 
 _sources = ['PyUploadDemo.cpp'] + glob.glob("src/**/*.cpp", recursive=True)
 _extra_compile_args = ["-pthread", "-std=c++11", '-fvisibility=hidden']
-_include_dirs = [pybind11.get_include(), os.getcwd(), os.path.join(os.getcwd(), 'src')]
+_include_dirs = [pybind11.get_include(), os.path.join(os.getcwd(), 'src')]
 _ext_modules = [
     Extension(
         name=__CUPLOADER_NAME__,
