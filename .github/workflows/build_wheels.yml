@@ -27,7 +27,7 @@ jobs:
           CIBW_BUILD: "cp39-*"  # 指定 Python 版本
           CIBW_ARCHS: "auto"    # 自动检测架构
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           path: ./wheelhouse/*.whl
           name: wheels
@@ -44,7 +44,7 @@ jobs:
           path: wheelhouse
 
       - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@1.6.4
         with:
           user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}

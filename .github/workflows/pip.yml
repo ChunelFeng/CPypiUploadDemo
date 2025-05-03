@@ -12,9 +12,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [ubuntu-latest, macos-latest, windows-latest]
-        # platform: [ubuntu-latest, ubuntu-18.04, ubuntu-16.04, macos-latest, windows-latest]
-        # python-version: ["3.8", "3.9", "3.10"]
+        # platform: [ubuntu-latest, macos-latest, windows-latest]
+        platform: [ubuntu-latest]
+        python-version: ["3.8", "3.9"]
 
     runs-on: ${{ matrix.platform }}
 
@@ -39,6 +39,7 @@ jobs:
 
     - name: Build and install
       run: |
+        cd python
         python setup.py build
         python setup.py sdist bdist_wheel
 
