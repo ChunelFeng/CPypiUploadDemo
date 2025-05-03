@@ -44,5 +44,4 @@ jobs:
       run: |
         cd python
         twine check dist/*
-        twine upload --verbose dist/*
-        skip_existing: true
+        twine upload --verbose --skip-existing dist/*
