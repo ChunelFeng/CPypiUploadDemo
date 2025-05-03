@@ -12,8 +12,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [macos-latest, windows-latest]
-        python-version: ["3.8", "3.9", "3.10"]
+        platform: [macos-latest, windows-latest, ubuntu-latest]
+        python-version: ["3.6",
+                         "3.7",
+                         "3.8",
+                         "3.9",
+                         "3.10",
+                         "3.11",
+                         "3.12",
+                         "3.13",
+                         "3.14",]
 
     runs-on: ${{ matrix.platform }}
 
@@ -31,11 +39,19 @@ jobs:
         python -m pip install --upgrade pip
         pip install pybind11 setuptools wheel twine
 
-    - name: Build and install
+    - name: Build and install on mac and windows
+      if: matrix.platform != 'ubuntu-latest' && runner.os != 'Linux'
       run: |
         cd python
         python setup.py build
-        python setup.py sdist bdist_wheel
+        python setup.py bdist_wheel
+
+    - name: Build and install on linux
+      if: matrix.platform == 'ubuntu-latest' && runner.os == 'Linux'
+      run: |
+        cd python
+        python setup.py build
+        python setup.py bdist_wheel --plat-name manylinux2014_x86_64
 
     - name: Upload to pypi
       env:
