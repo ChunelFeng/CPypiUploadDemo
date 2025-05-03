@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         # os: [ubuntu-20.04, windows-latest, macos-latest]
-        os: [ubuntu-20.04]
+        os: [macos-latest]
 
     steps:
       - uses: actions/checkout@v3
@@ -30,7 +30,6 @@ jobs:
         with:
           package-dir: python
           output-dir: wheelhouse
-          before-build: pip install pybind11
 
       - uses: actions/upload-artifact@v4
         with:
