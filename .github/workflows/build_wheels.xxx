@@ -30,8 +30,6 @@ jobs:
         with:
           package-dir: python
           output-dir: wheelhouse
-          before-build: |
-            pip install pybind11
 
       - uses: actions/upload-artifact@v4
         with:
