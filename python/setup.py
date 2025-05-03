@@ -4,7 +4,7 @@ from setuptools import setup, Extension
 import pybind11
 
 __CUPLOADER_NAME__ = "PyCUploader"
-__CUPLOADER_VERSION__ = "0.2.4"
+__CUPLOADER_VERSION__ = "0.2.5"
 __CUPLOADER_AUTHOR__ = "Chunel"
 __CUPLOADER_AUTHOR_EMAIL__ = "chunel@foxmail.com"
 __CUPLOADER_DESCRIPTION__ = "Chunel test pypi uploader"
@@ -42,15 +42,12 @@ setup(
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
         "Programming Language :: Python :: 3.12",
         "Programming Language :: Python :: 3.13",
-        "Programming Language :: Python :: 3.14",
         "Programming Language :: C++",
         "Operating System :: Unix",
         "Operating System :: MacOS :: MacOS X",
