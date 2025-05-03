@@ -22,7 +22,7 @@ jobs:
         run: pip install cibuildwheel==2.3.0
 
       - name: Build wheels
-        run: cibuildwheel --output-dir wheelhouse
+        run: cibuildwheel --output-dir wheelhouse --config-file {package}/python/setup.py
         env:
           CIBW_BUILD: "cp39-*"  # 指定 Python 版本
           CIBW_ARCHS: "auto"    # 自动检测架构
