@@ -12,13 +12,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        platform: [macos-latest, windows-latest, ubuntu-latest]
+        # platform: [macos-latest, windows-latest, ubuntu-latest]
+        platform: [macos-latest]
         python-version: ["3.8",
                          "3.9",
-                         "3.10",
-                         "3.11",
-                         "3.12",
-                         "3.13",]
+#                         "3.10",
+#                         "3.11",
+#                         "3.12",
+#                         "3.13",
+        ]
 
     runs-on: ${{ matrix.platform }}
 
@@ -51,6 +53,7 @@ jobs:
         python setup.py bdist_wheel --plat-name manylinux2014_x86_64
 
     - name: Upload to pypi
+      if: github.event_name == 'release' && github.event.action == 'published'
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
