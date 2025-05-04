@@ -4,7 +4,7 @@ from setuptools import setup, Extension
 import pybind11
 
 __CUPLOADER_NAME__ = "PyCUploader"
-__CUPLOADER_VERSION__ = "0.2.6"
+__CUPLOADER_VERSION__ = "0.2.7"
 __CUPLOADER_AUTHOR__ = "Chunel"
 __CUPLOADER_AUTHOR_EMAIL__ = "chunel@foxmail.com"
 __CUPLOADER_DESCRIPTION__ = "Chunel test pypi uploader"
@@ -37,9 +37,9 @@ setup(
     long_description='you can get everything here : [PyCUploader](https://github.com/ChunelFeng/CPypiUploadDemo)',
     long_description_content_type="text/markdown",
     keywords=['python', __CUPLOADER_NAME__, 'test', 'demo', 'upload'],
-    install_requires=[
-        "pybind11",
-    ],
+    # install_requires=[
+    #     "pybind11",
+    # ],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
