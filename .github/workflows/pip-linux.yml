@@ -1,4 +1,4 @@
-name: Pip
+name: Pip-Linux
 
 on:
   workflow_dispatch:
@@ -16,13 +16,16 @@ jobs:
       fail-fast: false
       matrix:
         # platform: [macos-latest, windows-latest, ubuntu-latest]
-        platform: [macos-latest]
-        python-version: ["3.8",
+        platform: [ubuntu-latest]
+        python-version: [
+                         "3.6",
+                         "3.7",
+                         "3.8",
                          "3.9",
-#                         "3.10",
-#                         "3.11",
-#                         "3.12",
-#                         "3.13",
+                         "3.10",
+                         "3.11",
+                         "3.12",
+                         "3.13",
         ]
 
     runs-on: ${{ matrix.platform }}
@@ -41,14 +44,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install pybind11 setuptools wheel twine
 
-    - name: Build and install on without linux
-      if: runner.os != 'Linux'
-      run: |
-        cd python
-        python setup.py bdist_wheel
-
     - name: Build and install on linux only
-      if: runner.os == 'Linux'
       run: |
         cd python
         python setup.py bdist_wheel --plat-name manylinux2014_x86_64
