@@ -18,8 +18,6 @@ jobs:
         # platform: [macos-latest, windows-latest, ubuntu-latest]
         platform: [ubuntu-latest]
         python-version: [
-                         "3.6",
-                         "3.7",
                          "3.8",
                          "3.9",
                          "3.10",
@@ -50,7 +48,6 @@ jobs:
         python setup.py bdist_wheel --plat-name manylinux2014_x86_64
 
     - name: Upload to pypi
-      if: github.event_name == 'release' && github.event.action == 'published'
       env:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
